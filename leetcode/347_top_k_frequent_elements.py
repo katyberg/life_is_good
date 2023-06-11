@@ -4,25 +4,25 @@ from typing import List
 
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        # counter = Counter(nums)
-        # # Counter for n
-        # # {
-        # #   1: 2,
-        # #   2: 5,
-        # #   3: 1,
-        # #   4: 5
-        # # }
-        # # sort by counts
-        # count_num = []
-        # for num, count in counter.items():
-        #     count_num.append((count, num))
-        # # IMPORTANT! when sorting tuples we need to specify the sort key if order matter!
-        # # Ex: [(5, 4), (5, 2), (2, 1), (1, 3)]
-        # count_num.sort(key=lambda t: t[0], reverse=True)
-        # result = []
-        # for i in range(k):
-        #     result.append(count_num[i][1])
-        # return result
+        counter = Counter(nums)
+        # Counter for n
+        # {
+        #   1: 2,
+        #   2: 5,
+        #   3: 1,
+        #   4: 5
+        # }
+        # sort by counts
+        count_num = []
+        for num, count in counter.items():
+            count_num.append((count, num))
+        # IMPORTANT! when sorting tuples we need to specify the sort key if order matter!
+        # Ex: [(5, 4), (5, 2), (2, 1), (1, 3)]
+        count_num.sort(key=lambda t: t[0], reverse=True)
+        result = []
+        for i in range(k):
+            result.append(count_num[i][1])
+        return result
 
         # NOTE THAT THIS FUNCTION COULD BE A ONE-LINER!!!!
         # DUH!!!!
