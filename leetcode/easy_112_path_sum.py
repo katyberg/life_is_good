@@ -16,3 +16,17 @@ class Solution:
             return targetSum == 0
         return self.hasPathSum(root.left, targetSum) or self.hasPathSum(root.right, targetSum)
 
+        # # This is another way perhaps more intuitive....
+        # def dfs(node, curr):
+        #     if not node:
+        #         return False
+        #     # if both children are null, then the node is a leaf
+        #     if node.left == None and node.right == None:
+        #         return (curr + node.val) == targetSum
+        #     curr += node.val
+        #     left = dfs(node.left, curr)
+        #     right = dfs(node.right, curr)
+        #     return left or right
+
+        # return dfs(root, 0)
+
