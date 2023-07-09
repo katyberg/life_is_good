@@ -2,7 +2,7 @@ class Solution:
     def canVisitAllRooms(self, rooms: List[List[int]]) -> bool:
         # Escapology :-)
         n = len(rooms)
-        all_rooms = {r for r in range(n)}
+        all_rooms = {r for r in range(n)}  # WE CAN ALSO JUST CHECK THE LEN AT THE END!!!! SAVE MEMORY!!!!
         visited_rooms = set()
         def dfs(room):
             if room not in visited_rooms:
