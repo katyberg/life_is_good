@@ -52,27 +52,49 @@ class Solution:
         if grid[0][0] != 0 or grid[n - 1][n - 1] != 0:
             return -1
         
-        # queue = deque((0, 0))  # NOTE THIS IS WRONG!!!! HAS TO BE A LIST!!!!
-        queue = deque([(0, 0)])  # cell is represented by (row, col) tuple, grid[0][0] has to be 0
-        # Ps: I could also just do:
-        # queue = deque()
-        # queue.append((0, 0))
-        grid[0][0] = 1  # IMPORTANT: mark cell at (0, 0) to have depth 1 (also indicates visited)
+        # # Version 1 => modify the matrix as we go; get_neighbors can remain as is.
+        # # queue = deque((0, 0))  # NOTE THIS IS WRONG!!!! HAS TO BE A LIST!!!!
+        # queue = deque([(0, 0)])  # cell is represented by (row, col) tuple, grid[0][0] has to be 0
+        # # Ps: I could also just do:
+        # # queue = deque()
+        # # queue.append((0, 0))
+        # grid[0][0] = 1  # IMPORTANT: mark cell at (0, 0) to have depth 1 (also indicates visited)
+        # while queue:
+        #     row, col = queue.popleft()  # NOTE we have to put (row, col) in tuple here!
+        #     cur_depth = grid[row][col]  # IMPORTANT HOW cur_depth IS SET/INCREMENTED!!!!
+        #     if row == n - 1 and col == n - 1:
+        #         return cur_depth
+        #     neighbors = get_neighbors(row, col)  # return only neighbor that we should work on
+        #     print(f'row={row}, col={col}, cur_depth={cur_depth}, neighbors={neighbors}')
+        #     for neighbor in neighbors:
+        #         # IMPORTANT!!!! BELOW STRATEGY FAILED TEST CASE [[0]]!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        #         # PUT THIS CHECK AT THE BEGINNING OF EACH RECURRENCE WORKS BETTER!!!!
+        #         # # we preemptively check neighbor before recurring, could be faster
+        #         # if neighbor == (n - 1, n - 1):  # we guarenteed that first and last cell has 0
+        #         #     return cur_depth + 1
+        #         neighbor_row, neighbor_col = neighbor
+        #         grid[neighbor_row][neighbor_col] = cur_depth + 1
+        #         queue.append(neighbor)
+        
+        # Version 2 => cannot modify the matrix itself; get_neighbors can remain as is.
+        queue = deque([(0, 0, 1)])  # row, col, depth (which starts at 1)
+        to_explore = set()
         while queue:
-            row, col = queue.popleft()  # NOTE we have to put (row, col) in tuple here!
-            cur_depth = grid[row][col]  # IMPORTANT HOW cur_depth IS SET/INCREMENTED!!!!
+            row, col, depth = queue.popleft()
+            # IMPORTANT!!!! THIS IS WRONG PLACE TO PUT visited!!!! IN FACT THE NAME VISITED IS CONFUSING TO BEGIN WITH!
+            # WE SHOULD UPDATE visited BEFORE PUTTING A NODE ON THE STACK OR QUEUE TO BEGIN WITH!!!!
+            # THAT'S WHY I CHANGE THE NAME TO to_explore.
+            # IN THE STACK DFS RECURSION IMPLEMENTATION, IT JUST SO HAPPEN THAT IT DOES NOT MATTER IF WE PUT IT AS
+            # THE FIRST LINE OF RECURSIVE CALL (BECAUSE NOTHING ELSE HAPPENS IN BETWEEN). SEE EXAMPLE:
+            # https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/editorial/
+            # visited.add((row, col))
             if row == n - 1 and col == n - 1:
-                return cur_depth
-            neighbors = get_neighbors(row, col)  # return only neighbor that we should work on
-            print(f'row={row}, col={col}, cur_depth={cur_depth}, neighbors={neighbors}')
+                return depth
+            neighbors = get_neighbors(row, col)
             for neighbor in neighbors:
-                # IMPORTANT!!!! BELOW STRATEGY FAILED TEST CASE [[0]]!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                # PUT THIS CHECK AT THE BEGINNING OF EACH RECURRENCE WORKS BETTER!!!!
-                # # we preemptively check neighbor before recurring, could be faster
-                # if neighbor == (n - 1, n - 1):  # we guarenteed that first and last cell has 0
-                #     return cur_depth + 1
-                neighbor_row, neighbor_col = neighbor
-                grid[neighbor_row][neighbor_col] = cur_depth + 1
-                queue.append(neighbor)
+                if neighbor not in to_explore:
+                    neighbor_row, neighbor_col = neighbor
+                    to_explore.add((neighbor_row, neighbor_col))
+                    queue.append((neighbor_row, neighbor_col, depth + 1))
         return -1
 
