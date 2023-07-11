@@ -7,3 +7,7 @@ class Solution:
         for x, y in edges:
             indegree[y] += 1
         return [i for i, num in enumerate(indegree) if num == 0]
+
+    # # Yohan's solution for Adjacency matrix using numpy assuming self edge is 0 not 1
+    # def find_sources(G):
+    #     return np.where(np.sum(G, (0)) == 0)[0]
