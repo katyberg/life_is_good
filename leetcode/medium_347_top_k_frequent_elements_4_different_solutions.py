@@ -42,6 +42,12 @@ class Solution:
         # # The above steps can be squished into ONE LINE (as usual)!!!!
         # return heapq.nlargest(k, counter.keys(), key=counter.get)
 
+        # # Ps: above we can just do:
+        # for key, val in counts.items():
+        #     heapq.heappush(heap, (val, key))
+        #     if len(heap) > k:
+        #         heapq.heappop(heap)
+        
         # # Implementation 3: Bucket sort => O(N)
         # counter = Counter(nums)  # ex: {1:3, 2:2, 3:1, 4:2}
         # buckets = [[]] * len(nums)  # ex: [[],[],[],....] NOTE [[]] NOT []
