@@ -24,3 +24,16 @@ class Solution:
         # if num_popped is 2 + 2 = 4 > k => we popped too much, so we add 1 to result
         # if num_popped is 2 + 1 = 3 == k => we popped exactly all, then what's left is answer
         return 0
+
+        # # This one actually does not need to use heap
+        # counts = Counter(arr)
+        # ordered = sorted(counts.values(), reverse=True)
+        # while k:
+        #     val = ordered[-1]
+        #     if val <= k:
+        #         k -= val
+        #         ordered.pop()
+        #     else:
+        #         break
+        # return len(ordered)
+
