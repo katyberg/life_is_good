@@ -23,3 +23,10 @@ class Solution:
             to_remove += 1
         return to_remove
 
+        # # Btw, counter provides most_common function already
+        # # In Python, we can use the built-in Counter class for multi-set.
+        # counts = collections.Counter(arr)
+        # # Extract the counts in reverse-sorted order.
+        # # most_common gives (number, count) pairs, reverse sorted on count.
+        # counts = [count for number, count in counts.most_common()]
+
