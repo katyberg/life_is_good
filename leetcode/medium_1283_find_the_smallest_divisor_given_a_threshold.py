@@ -16,7 +16,6 @@ class Solution:
         #  i > 9  => 1+1+1+1 => 4  <==== all divisors larger than max(nums) have dsum 4
         #                                ^ if threshold < len(nums) there is no answer
 
-        # domain range is min and max of the array
         def calculate_division_sum(divisor):
             division_sum = 0
             for num in nums:
