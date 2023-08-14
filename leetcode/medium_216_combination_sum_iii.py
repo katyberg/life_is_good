@@ -1,3 +1,5 @@
+# Time complexity = P(9,k) = O( (9!*k) / (9-k)!)
+# Space complexity = O(k)
 class Solution:
     def combinationSum3(self, k: int, n: int) -> List[List[int]]:
         def get_next_valid_digits(digit: int):
