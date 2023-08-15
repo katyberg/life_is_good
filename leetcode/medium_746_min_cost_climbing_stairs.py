@@ -1,7 +1,6 @@
 class Solution:
     def minCostClimbingStairs(self, cost: List[int]) -> int:
         # Ituition:
-        # God please protect my father!!!!
         # Dynamic programming! 3 things:
         # state memoization => identify STATE: cost it takes to get to a stair
         # function => dp is cost to get to dp(i) is either dp(i-1) or dp(i-2)
