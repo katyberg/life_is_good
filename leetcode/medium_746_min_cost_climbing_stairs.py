@@ -13,7 +13,7 @@ class Solution:
         #             dp(0)   dp(1)
         #             c=0      c=0
 
-        # Using recursive approach
+        # Using recursive approach (top-down)
         def dp(i: int):  # i represents the ith stair
             # base case
             if i < 2:
@@ -30,7 +30,7 @@ class Solution:
         min_cost = dp(len(cost))
         return min_cost
 
-        # # Using iterative approach
+        # # Using iterative approach (bottom-up)
         # n = len(cost) + 1
         # memoization = [0] * n
         # for i in range(2, len(cost) + 1):
